@@ -1,4 +1,5 @@
 # PopulationDynamicsModel_AI
+Proyecto creado junto a AlexisGitHu, aparpo, blanca-1807, ClaudiaReyero, delpraa, JCOQUE, Playtesch
 Proyecto para la creación de un modelo de simulación de dinámica de poblaciones mediante aprendizaje por refuerzo
 Trophic Terra es un software de simulación online de ecosistemas virtuales. Su principal objetivo es recrear modelos presa-depredador de manera empírica. Esto permite hacer estudios sobre la evolución futura de dos especies a lo largo del tiempo en cuestión de minutos.  Para lograrlo, combina las técnicas de simulación multiagente y aprendizaje por refuerzo para entrenar inteligencias artificiales capaces de adaptarse a su entorno. Este proceso de aprendizaje automático se muestra de manera gráfica continuamente, lo que hace que Trophic Terra sea también una herramienta visual para entender el funcionamiento del aprendizaje por refuerzo.
 Algunas de las herramientas que podrás encontrar en la página son:
