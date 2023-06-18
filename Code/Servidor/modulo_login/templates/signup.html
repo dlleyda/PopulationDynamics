@@ -1,0 +1,42 @@
+{% extends 'baseLogIn.html' %}
+{% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
+{% endif %}
+
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+   {% if form %}
+       <body class="signup-body">
+            <h1 class="titulo text-center mx-auto">BIENVENIDO A</h1>
+            <img src="../../static/assets/Banner.png" class="banner">
+
+            <form class="form-signin text-center mx-auto"  method="POST" action="{{url_for('modulo_login.signup')}}">
+                {{ form.hidden_tag() }}
+                    <div class="signup-form mx-auto">
+                        <div class="elemento-form">
+                            {{ wtf.form_field(form.username) }}
+                        </div>
+                        <div class="elemento-form">
+                            {{ wtf.form_field(form.email) }}
+                        </div>
+                        <div class="elemento-form">
+                        {{ wtf.form_field(form.password) }}
+                        </div>
+                        <div class="elemento-form">
+                        {{ wtf.form_field(form.confirm_password) }}
+                        </div>
+                        <div class="elemento-form">
+                            {{ wtf.form_field(form.user_agreement) }}
+                        </div>
+                    </div>
+                <div class="mx-auto">
+                    {{ wtf.form_field(form.submit, class="btn boton-login" ) }}
+                </div>
+            </form>
+        </body>
+    {% endif %}
+
+
+{% endblock %}

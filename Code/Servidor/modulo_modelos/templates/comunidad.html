@@ -1,0 +1,32 @@
+{% extends 'baseWeb.html' %}
+{% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
+{% endif %}
+{% block content %}
+
+<body class="modelos-body">
+    <h1 class="titulo1">COMUNIDAD</h1>
+    <h2 class="titulo2">Proyectos</h2>
+
+    <div class="tarjetas">
+        {% for modelo in modelos %}
+            <div class="proyecto-tarjeta">
+                <div class="tarjeta-imagen" onclick="window.location.href = `{{url_for('modulo_modelos.cargar_modelo', id=modelo.id)}}`" style="cursor:pointer">
+                    <img src="../static/assets/usuario.png" class="usuario-imagen">
+                    <img src="../static/assets/imagen.png" class="imagen-imagen">
+                    <p class="nombre-proyecto">{{modelo.nombre}}</p>
+                </div>
+
+                <div  class="tarjeta-info-comunidad">
+                    <p class="creador-proyecto">{{modelo.creador}}</p>
+                    <div class="fecha-proyecto">
+                        <img src="../static/assets/calendario.png" class="fecha-imagen">
+                        <p class="fecha-texto">{{modelo.fecha_creacion}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+{% endblock %}

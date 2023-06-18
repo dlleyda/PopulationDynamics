@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Trophic Terra</title>
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+        <!-- Bootsrtrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <!-- Highcharts -->
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/highcharts-more.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+        <!-- PaperJS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-core.min.js"></script>
+        <link rel="stylesheet" href="../static/css/estilo_prueba.css">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <div class="navbar">
+            <!-- Profile icon -->
+            <svg width="65" height="65" class="bi bi-person-circle" style="position:absolute" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32.5 0C14.56 0 0 14.56 0 32.5C0 50.44 14.56 65 32.5 65C50.44 65 65 50.44 65 32.5C65 14.56 50.44 0 32.5 0ZM32.5 9.75C37.895 9.75 42.25 14.105 42.25 19.5C42.25 24.895 37.895 29.25 32.5 29.25C27.105 29.25 22.75 24.895 22.75 19.5C22.75 14.105 27.105 9.75 32.5 9.75ZM32.5 55.9C24.375 55.9 17.1925 51.74 13 45.435C13.0975 38.9675 26 35.425 32.5 35.425C38.9675 35.425 51.9025 38.9675 52 45.435C47.8075 51.74 40.625 55.9 32.5 55.9Z" fill="#1B1C1E"/>
+            </svg>
+
+            <div class="navegacion">
+                {% block navbarli %}
+
+                {%  if get_current_tab() == 'modelos' %}
+                <a href="{{url_for('modulo_modelos.modelos')}}">
+                    <span class="apartado apartado_active">
+                        <svg class="icono_apartado" width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block">
+                            <path d="M36.5 4H20.5L16.5 0H4.5C2.3 0 0.52 1.8 0.52 4L0.5 28C0.5 30.2 2.3 32 4.5 32H36.5C38.7 32 40.5 30.2 40.5 28V8C40.5 5.8 38.7 4 36.5 4ZM26.5 10C28.7 10 30.5 11.8 30.5 14C30.5 16.2 28.7 18 26.5 18C24.3 18 22.5 16.2 22.5 14C22.5 11.8 24.3 10 26.5 10ZM34.5 26H18.5V24C18.5 21.34 23.84 20 26.5 20C29.16 20 34.5 21.34 34.5 24V26Z" fill="#1B1C1E"/>
+                        </svg>
+                        <p class="texto_apartado">MI UNIDAD</p>
+                    </span>
+                </a>
+                {% else %}
+                 <a href="{{url_for('modulo_modelos.modelos')}}">
+                    <span class="apartado">
+                        <svg class="icono_apartado" width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block">
+                            <path d="M36.5 4H20.5L16.5 0H4.5C2.3 0 0.52 1.8 0.52 4L0.5 28C0.5 30.2 2.3 32 4.5 32H36.5C38.7 32 40.5 30.2 40.5 28V8C40.5 5.8 38.7 4 36.5 4ZM26.5 10C28.7 10 30.5 11.8 30.5 14C30.5 16.2 28.7 18 26.5 18C24.3 18 22.5 16.2 22.5 14C22.5 11.8 24.3 10 26.5 10ZM34.5 26H18.5V24C18.5 21.34 23.84 20 26.5 20C29.16 20 34.5 21.34 34.5 24V26Z" fill="#1B1C1E"/>
+                        </svg>
+                        <p class="texto_apartado">MI UNIDAD</p>
+                    </span>
+                </a>
+                {% endif %}
+
+                {%  if get_current_tab() == 'comunidad' %}
+                <a href="{{url_for('modulo_modelos.comunidad')}}">
+                    <span class="apartado apartado_active">
+                        <svg class="icono_apartado" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.99984 17.6667C5.08317 17.6667 4.33317 18.4167 4.33317 19.3333C4.33317 20.25 5.08317 21 5.99984 21C6.9165 21 7.6665 20.25 7.6665 19.3333C7.6665 18.4167 6.9165 17.6667 5.99984 17.6667ZM0.999837 11.8333C0.533171 11.8333 0.166504 12.2 0.166504 12.6667C0.166504 13.1333 0.533171 13.5 0.999837 13.5C1.4665 13.5 1.83317 13.1333 1.83317 12.6667C1.83317 12.2 1.4665 11.8333 0.999837 11.8333ZM5.99984 4.33333C5.08317 4.33333 4.33317 5.08333 4.33317 6C4.33317 6.91666 5.08317 7.66666 5.99984 7.66666C6.9165 7.66666 7.6665 6.91666 7.6665 6C7.6665 5.08333 6.9165 4.33333 5.99984 4.33333ZM19.3332 7.66666C20.2498 7.66666 20.9998 6.91666 20.9998 6C20.9998 5.08333 20.2498 4.33333 19.3332 4.33333C18.4165 4.33333 17.6665 5.08333 17.6665 6C17.6665 6.91666 18.4165 7.66666 19.3332 7.66666ZM12.6665 1.83333C13.1332 1.83333 13.4998 1.46666 13.4998 0.999997C13.4998 0.533331 13.1332 0.166664 12.6665 0.166664C12.1998 0.166664 11.8332 0.533331 11.8332 0.999997C11.8332 1.46666 12.1998 1.83333 12.6665 1.83333ZM25.9998 24.3333C25.0832 24.3333 24.3332 25.0833 24.3332 26C24.3332 26.9167 25.0832 27.6667 25.9998 27.6667C26.9165 27.6667 27.6665 26.9167 27.6665 26C27.6665 25.0833 26.9165 24.3333 25.9998 24.3333ZM25.9998 11C25.0832 11 24.3332 11.75 24.3332 12.6667C24.3332 13.5833 25.0832 14.3333 25.9998 14.3333C26.9165 14.3333 27.6665 13.5833 27.6665 12.6667C27.6665 11.75 26.9165 11 25.9998 11ZM30.9998 18.5C30.5332 18.5 30.1665 18.8667 30.1665 19.3333C30.1665 19.8 30.5332 20.1667 30.9998 20.1667C31.4665 20.1667 31.8332 19.8 31.8332 19.3333C31.8332 18.8667 31.4665 18.5 30.9998 18.5ZM19.3332 30.1667C18.8665 30.1667 18.4998 30.5333 18.4998 31C18.4998 31.4667 18.8665 31.8333 19.3332 31.8333C19.7998 31.8333 20.1665 31.4667 20.1665 31C20.1665 30.5333 19.7998 30.1667 19.3332 30.1667ZM12.6665 10.1667C11.2832 10.1667 10.1665 11.2833 10.1665 12.6667C10.1665 14.05 11.2832 15.1667 12.6665 15.1667C14.0498 15.1667 15.1665 14.05 15.1665 12.6667C15.1665 11.2833 14.0498 10.1667 12.6665 10.1667ZM12.6665 24.3333C11.7498 24.3333 10.9998 25.0833 10.9998 26C10.9998 26.9167 11.7498 27.6667 12.6665 27.6667C13.5832 27.6667 14.3332 26.9167 14.3332 26C14.3332 25.0833 13.5832 24.3333 12.6665 24.3333ZM19.3332 16.8333C17.9498 16.8333 16.8332 17.95 16.8332 19.3333C16.8332 20.7167 17.9498 21.8333 19.3332 21.8333C20.7165 21.8333 21.8332 20.7167 21.8332 19.3333C21.8332 17.95 20.7165 16.8333 19.3332 16.8333Z" fill="#2F8DAB"/>
+                            <path d="M4.33317 26C4.33317 25.0833 5.08317 24.3333 5.99984 24.3333C6.9165 24.3333 7.6665 25.0833 7.6665 26C7.6665 26.9167 6.9165 27.6667 5.99984 27.6667C5.08317 27.6667 4.33317 26.9167 4.33317 26Z" fill="#2F8DAB"/>
+                            <path d="M4.33317 12.6667C4.33317 11.75 5.08317 11 5.99984 11C6.9165 11 7.6665 11.75 7.6665 12.6667C7.6665 13.5833 6.9165 14.3333 5.99984 14.3333C5.08317 14.3333 4.33317 13.5833 4.33317 12.6667Z" fill="#2F8DAB"/>
+                            <path d="M31.8332 12.6667C31.8332 13.1333 31.4665 13.5 30.9998 13.5C30.5332 13.5 30.1665 13.1333 30.1665 12.6667C30.1665 12.2 30.5332 11.8333 30.9998 11.8333C31.4665 11.8333 31.8332 12.2 31.8332 12.6667Z" fill="#2F8DAB"/>
+                            <path d="M20.1665 0.999997C20.1665 1.46666 19.7998 1.83333 19.3332 1.83333C18.8665 1.83333 18.4998 1.46666 18.4998 0.999997C18.4998 0.533331 18.8665 0.166664 19.3332 0.166664C19.7998 0.166664 20.1665 0.533331 20.1665 0.999997Z" fill="#2F8DAB"/>
+                            <path d="M0.166504 19.3333C0.166504 18.8667 0.533171 18.5 0.999837 18.5C1.4665 18.5 1.83317 18.8667 1.83317 19.3333C1.83317 19.8 1.4665 20.1667 0.999837 20.1667C0.533171 20.1667 0.166504 19.8 0.166504 19.3333Z" fill="#2F8DAB"/>
+                            <path d="M11.8332 31C11.8332 30.5333 12.1998 30.1667 12.6665 30.1667C13.1332 30.1667 13.4998 30.5333 13.4998 31C13.4998 31.4667 13.1332 31.8333 12.6665 31.8333C12.1998 31.8333 11.8332 31.4667 11.8332 31Z" fill="#2F8DAB"/>
+                            <path d="M14.3332 6C14.3332 6.91666 13.5832 7.66666 12.6665 7.66666C11.7498 7.66666 10.9998 6.91666 10.9998 6C10.9998 5.08333 11.7498 4.33333 12.6665 4.33333C13.5832 4.33333 14.3332 5.08333 14.3332 6Z" fill="#2F8DAB"/>
+                            <path d="M10.1665 19.3333C10.1665 17.95 11.2832 16.8333 12.6665 16.8333C14.0498 16.8333 15.1665 17.95 15.1665 19.3333C15.1665 20.7167 14.0498 21.8333 12.6665 21.8333C11.2832 21.8333 10.1665 20.7167 10.1665 19.3333Z" fill="#2F8DAB"/>
+                            <path d="M24.3332 19.3333C24.3332 18.4167 25.0832 17.6667 25.9998 17.6667C26.9165 17.6667 27.6665 18.4167 27.6665 19.3333C27.6665 20.25 26.9165 21 25.9998 21C25.0832 21 24.3332 20.25 24.3332 19.3333Z" fill="#2F8DAB"/>
+                            <path d="M24.3332 6C24.3332 5.08333 25.0832 4.33333 25.9998 4.33333C26.9165 4.33333 27.6665 5.08333 27.6665 6C27.6665 6.91666 26.9165 7.66666 25.9998 7.66666C25.0832 7.66666 24.3332 6.91666 24.3332 6Z" fill="#2F8DAB"/>
+                            <path d="M17.6665 26C17.6665 25.0833 18.4165 24.3333 19.3332 24.3333C20.2498 24.3333 20.9998 25.0833 20.9998 26C20.9998 26.9167 20.2498 27.6667 19.3332 27.6667C18.4165 27.6667 17.6665 26.9167 17.6665 26Z" fill="#2F8DAB"/>
+                            <path d="M16.8332 12.6667C16.8332 11.2833 17.9498 10.1667 19.3332 10.1667C20.7165 10.1667 21.8332 11.2833 21.8332 12.6667C21.8332 14.05 20.7165 15.1667 19.3332 15.1667C17.9498 15.1667 16.8332 14.05 16.8332 12.6667Z" fill="#2F8DAB"/>
+                        </svg>
+                        <p class="texto_apartado">COMUNIDAD</p>
+                    </span>
+                </a>
+                {% else %}
+                <a href="{{url_for('modulo_modelos.comunidad')}}">
+                    <span class="apartado">
+                        <svg class="icono_apartado" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.99984 17.6667C5.08317 17.6667 4.33317 18.4167 4.33317 19.3333C4.33317 20.25 5.08317 21 5.99984 21C6.9165 21 7.6665 20.25 7.6665 19.3333C7.6665 18.4167 6.9165 17.6667 5.99984 17.6667ZM0.999837 11.8333C0.533171 11.8333 0.166504 12.2 0.166504 12.6667C0.166504 13.1333 0.533171 13.5 0.999837 13.5C1.4665 13.5 1.83317 13.1333 1.83317 12.6667C1.83317 12.2 1.4665 11.8333 0.999837 11.8333ZM5.99984 4.33333C5.08317 4.33333 4.33317 5.08333 4.33317 6C4.33317 6.91666 5.08317 7.66666 5.99984 7.66666C6.9165 7.66666 7.6665 6.91666 7.6665 6C7.6665 5.08333 6.9165 4.33333 5.99984 4.33333ZM19.3332 7.66666C20.2498 7.66666 20.9998 6.91666 20.9998 6C20.9998 5.08333 20.2498 4.33333 19.3332 4.33333C18.4165 4.33333 17.6665 5.08333 17.6665 6C17.6665 6.91666 18.4165 7.66666 19.3332 7.66666ZM12.6665 1.83333C13.1332 1.83333 13.4998 1.46666 13.4998 0.999997C13.4998 0.533331 13.1332 0.166664 12.6665 0.166664C12.1998 0.166664 11.8332 0.533331 11.8332 0.999997C11.8332 1.46666 12.1998 1.83333 12.6665 1.83333ZM25.9998 24.3333C25.0832 24.3333 24.3332 25.0833 24.3332 26C24.3332 26.9167 25.0832 27.6667 25.9998 27.6667C26.9165 27.6667 27.6665 26.9167 27.6665 26C27.6665 25.0833 26.9165 24.3333 25.9998 24.3333ZM25.9998 11C25.0832 11 24.3332 11.75 24.3332 12.6667C24.3332 13.5833 25.0832 14.3333 25.9998 14.3333C26.9165 14.3333 27.6665 13.5833 27.6665 12.6667C27.6665 11.75 26.9165 11 25.9998 11ZM30.9998 18.5C30.5332 18.5 30.1665 18.8667 30.1665 19.3333C30.1665 19.8 30.5332 20.1667 30.9998 20.1667C31.4665 20.1667 31.8332 19.8 31.8332 19.3333C31.8332 18.8667 31.4665 18.5 30.9998 18.5ZM19.3332 30.1667C18.8665 30.1667 18.4998 30.5333 18.4998 31C18.4998 31.4667 18.8665 31.8333 19.3332 31.8333C19.7998 31.8333 20.1665 31.4667 20.1665 31C20.1665 30.5333 19.7998 30.1667 19.3332 30.1667ZM12.6665 10.1667C11.2832 10.1667 10.1665 11.2833 10.1665 12.6667C10.1665 14.05 11.2832 15.1667 12.6665 15.1667C14.0498 15.1667 15.1665 14.05 15.1665 12.6667C15.1665 11.2833 14.0498 10.1667 12.6665 10.1667ZM12.6665 24.3333C11.7498 24.3333 10.9998 25.0833 10.9998 26C10.9998 26.9167 11.7498 27.6667 12.6665 27.6667C13.5832 27.6667 14.3332 26.9167 14.3332 26C14.3332 25.0833 13.5832 24.3333 12.6665 24.3333ZM19.3332 16.8333C17.9498 16.8333 16.8332 17.95 16.8332 19.3333C16.8332 20.7167 17.9498 21.8333 19.3332 21.8333C20.7165 21.8333 21.8332 20.7167 21.8332 19.3333C21.8332 17.95 20.7165 16.8333 19.3332 16.8333Z" fill="#2F8DAB"/>
+                            <path d="M4.33317 26C4.33317 25.0833 5.08317 24.3333 5.99984 24.3333C6.9165 24.3333 7.6665 25.0833 7.6665 26C7.6665 26.9167 6.9165 27.6667 5.99984 27.6667C5.08317 27.6667 4.33317 26.9167 4.33317 26Z" fill="#2F8DAB"/>
+                            <path d="M4.33317 12.6667C4.33317 11.75 5.08317 11 5.99984 11C6.9165 11 7.6665 11.75 7.6665 12.6667C7.6665 13.5833 6.9165 14.3333 5.99984 14.3333C5.08317 14.3333 4.33317 13.5833 4.33317 12.6667Z" fill="#2F8DAB"/>
+                            <path d="M31.8332 12.6667C31.8332 13.1333 31.4665 13.5 30.9998 13.5C30.5332 13.5 30.1665 13.1333 30.1665 12.6667C30.1665 12.2 30.5332 11.8333 30.9998 11.8333C31.4665 11.8333 31.8332 12.2 31.8332 12.6667Z" fill="#2F8DAB"/>
+                            <path d="M20.1665 0.999997C20.1665 1.46666 19.7998 1.83333 19.3332 1.83333C18.8665 1.83333 18.4998 1.46666 18.4998 0.999997C18.4998 0.533331 18.8665 0.166664 19.3332 0.166664C19.7998 0.166664 20.1665 0.533331 20.1665 0.999997Z" fill="#2F8DAB"/>
+                            <path d="M0.166504 19.3333C0.166504 18.8667 0.533171 18.5 0.999837 18.5C1.4665 18.5 1.83317 18.8667 1.83317 19.3333C1.83317 19.8 1.4665 20.1667 0.999837 20.1667C0.533171 20.1667 0.166504 19.8 0.166504 19.3333Z" fill="#2F8DAB"/>
+                            <path d="M11.8332 31C11.8332 30.5333 12.1998 30.1667 12.6665 30.1667C13.1332 30.1667 13.4998 30.5333 13.4998 31C13.4998 31.4667 13.1332 31.8333 12.6665 31.8333C12.1998 31.8333 11.8332 31.4667 11.8332 31Z" fill="#2F8DAB"/>
+                            <path d="M14.3332 6C14.3332 6.91666 13.5832 7.66666 12.6665 7.66666C11.7498 7.66666 10.9998 6.91666 10.9998 6C10.9998 5.08333 11.7498 4.33333 12.6665 4.33333C13.5832 4.33333 14.3332 5.08333 14.3332 6Z" fill="#2F8DAB"/>
+                            <path d="M10.1665 19.3333C10.1665 17.95 11.2832 16.8333 12.6665 16.8333C14.0498 16.8333 15.1665 17.95 15.1665 19.3333C15.1665 20.7167 14.0498 21.8333 12.6665 21.8333C11.2832 21.8333 10.1665 20.7167 10.1665 19.3333Z" fill="#2F8DAB"/>
+                            <path d="M24.3332 19.3333C24.3332 18.4167 25.0832 17.6667 25.9998 17.6667C26.9165 17.6667 27.6665 18.4167 27.6665 19.3333C27.6665 20.25 26.9165 21 25.9998 21C25.0832 21 24.3332 20.25 24.3332 19.3333Z" fill="#2F8DAB"/>
+                            <path d="M24.3332 6C24.3332 5.08333 25.0832 4.33333 25.9998 4.33333C26.9165 4.33333 27.6665 5.08333 27.6665 6C27.6665 6.91666 26.9165 7.66666 25.9998 7.66666C25.0832 7.66666 24.3332 6.91666 24.3332 6Z" fill="#2F8DAB"/>
+                            <path d="M17.6665 26C17.6665 25.0833 18.4165 24.3333 19.3332 24.3333C20.2498 24.3333 20.9998 25.0833 20.9998 26C20.9998 26.9167 20.2498 27.6667 19.3332 27.6667C18.4165 27.6667 17.6665 26.9167 17.6665 26Z" fill="#2F8DAB"/>
+                            <path d="M16.8332 12.6667C16.8332 11.2833 17.9498 10.1667 19.3332 10.1667C20.7165 10.1667 21.8332 11.2833 21.8332 12.6667C21.8332 14.05 20.7165 15.1667 19.3332 15.1667C17.9498 15.1667 16.8332 14.05 16.8332 12.6667Z" fill="#2F8DAB"/>
+                        </svg>
+                        <p class="texto_apartado">COMUNIDAD</p>
+                    </span>
+                </a>
+                {% endif %}
+
+                <a href="{{url_for('modulo_login.logout')}}">
+                    <span class="apartado">
+                        <svg class="icono_apartado" height="48" viewBox="0 -960 960 960" width="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h291v60H180v600h291v60H180Zm486-185-43-43 102-102H375v-60h348L621-612l43-43 176 176-174 174Z"/>
+                        </svg>
+                        <p class="texto_apartado">LOG OUT</p>
+                    </span>
+                </a>
+
+                {% endblock %}
+            </div>
+
+            <svg class="bi bi-logotipo" width="205" height="20" viewBox="0 0 205 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 1.86173H12.309V4.02741H7.36086V18.0474H4.90724V3.98942H0V1.86173ZM23.3503 10.9424L27.3988 18.0474H24.4953L20.774 11.2084H17.1345V18.0474H14.6808V1.82373H15.7441H17.1345H21.5919C22.6142 1.82373 23.473 2.01371 24.25 2.39365C25.0269 2.77359 25.5994 3.34351 26.0084 4.02741C26.4173 4.71131 26.6218 5.54719 26.6218 6.49705C26.6218 7.44691 26.4173 8.24479 25.9675 8.96669C25.5585 9.65059 24.9451 10.2205 24.2091 10.6004C23.9637 10.7524 23.6774 10.8664 23.3503 10.9424ZM17.1345 9.04268H21.7145C22.4097 9.04268 22.9822 8.81471 23.4321 8.35878C23.8819 7.90284 24.0864 7.29493 24.0864 6.53504C24.0864 5.77516 23.8819 5.16724 23.4321 4.71131C22.9822 4.25538 22.4097 4.02741 21.7145 4.02741H17.1345V9.04268ZM41.3435 4.48334C41.8342 5.39521 42.1205 6.42106 42.1205 7.63688V12.2342C42.1205 13.412 41.8751 14.4759 41.3435 15.3877C40.8528 16.2996 40.1167 16.9835 39.217 17.4774C38.3174 17.9714 37.2132 18.1993 35.9864 18.1993C34.7596 18.1993 33.6964 17.9714 32.7558 17.4774C31.8562 16.9835 31.1201 16.2996 30.6294 15.3877C30.1386 14.4759 29.8524 13.45 29.8524 12.2342V7.63688C29.8524 6.42106 30.0977 5.39521 30.6294 4.48334C31.1201 3.57148 31.8562 2.88758 32.7558 2.39365C33.6555 1.89972 34.7596 1.67176 35.9864 1.67176C37.2132 1.67176 38.2765 1.89972 39.217 2.39365C40.1167 2.92557 40.8119 3.60947 41.3435 4.48334ZM39.5851 7.56089C39.5851 6.45905 39.2579 5.58518 38.6036 4.90128C37.9493 4.21738 37.0497 3.91343 35.9864 3.91343C34.8823 3.91343 34.0235 4.25538 33.3692 4.90128C32.7149 5.54719 32.3878 6.45905 32.3878 7.56089V12.3102C32.3878 13.412 32.7149 14.2859 33.3692 14.9698C34.0235 15.6537 34.9232 15.9577 35.9864 15.9577C37.0906 15.9577 37.9493 15.6157 38.6036 14.9698C39.2579 14.3239 39.5851 13.412 39.5851 12.3102V7.56089ZM57.1285 4.17939C57.5783 4.93928 57.7828 5.77516 57.7828 6.801C57.7828 7.78886 57.5783 8.66273 57.1285 9.42262C56.6786 10.1825 56.0652 10.7524 55.2882 11.1324C54.5113 11.5503 53.5707 11.7403 52.5484 11.7403H48.2545V18.0094H45.8009V1.86173H47.0686H48.2545H52.5484C53.6116 1.86173 54.5113 2.0517 55.2882 2.46964C56.1061 2.88758 56.6786 3.45749 57.1285 4.17939ZM55.2882 6.801C55.2882 5.96513 55.0429 5.28123 54.5522 4.74931C54.0614 4.25538 53.448 3.98942 52.6302 3.98942H48.2545V9.5746H52.6302C53.448 9.5746 54.0614 9.30864 54.5522 8.81471C55.0429 8.32078 55.2882 7.63688 55.2882 6.801ZM70.7461 8.96669H63.3034V1.86173H60.8498V18.0474H63.3034V11.1324H70.7461V18.0094H73.1997V1.86173H70.7461V8.96669ZM77.4935 18.0474H79.9471V1.86173H77.4935V18.0474ZM92.0926 15.3118C91.4383 15.7677 90.7022 15.9957 89.9661 15.9957C88.9029 15.9957 88.0441 15.6537 87.3898 14.9318C86.7355 14.2099 86.4083 13.2981 86.4083 12.1582V7.71287C86.4083 6.57304 86.7355 5.62318 87.3898 4.93928C88.0441 4.25538 88.9029 3.87543 89.9661 3.87543C90.4568 3.87543 90.9884 3.98942 91.4383 4.17939C91.8881 4.36936 92.3379 4.71131 92.706 5.09126C93.074 5.4712 93.3194 5.92713 93.4829 6.45905H95.9775C95.773 5.50919 95.4049 4.63532 94.8324 3.91343C94.2599 3.19153 93.5647 2.62162 92.7469 2.24167C91.929 1.86173 90.9884 1.63376 89.9661 1.63376C88.7393 1.63376 87.676 1.89972 86.7764 2.39365C85.8767 2.88758 85.1406 3.60947 84.6499 4.52134C84.1592 5.43321 83.9138 6.49705 83.9138 7.71287V12.1582C83.9138 13.374 84.1592 14.4379 84.6499 15.3118C85.1406 16.1856 85.8767 16.9075 86.7764 17.4394C87.676 17.9714 88.7393 18.1993 89.9661 18.1993C90.9884 18.1993 91.8881 18.0094 92.706 17.5914C93.5238 17.1735 94.219 16.6416 94.7915 15.9197C95.3641 15.1978 95.7321 14.3619 95.9366 13.374H93.4421C93.1967 14.2099 92.7469 14.8558 92.0926 15.3118ZM102.929 19.1872L108.041 10.9424C106.528 9.87855 105.506 8.13081 105.506 6.11711H108.9C109.595 6.11711 110.249 6.23109 110.822 6.45905L114.339 0.797883L117.937 6.57304C118.592 6.30708 119.369 6.11711 120.105 6.11711H123.499C123.499 8.2068 122.395 10.0685 120.759 11.0944L125.789 19.1872H102.929ZM120.064 11.4743C119.369 11.7783 118.592 11.9303 117.815 11.9303H114.952V18.4273H124.399L120.064 11.4743ZM111.558 6.801C113.071 7.63688 114.175 9.11867 114.502 10.8664C114.789 9.19465 115.811 7.75087 117.201 6.91499L114.339 2.31766L111.558 6.801ZM108.736 11.3603L104.361 18.4273H114.134V11.9682H111.231C110.331 11.9682 109.513 11.7403 108.736 11.3603ZM130.696 2.65961H136.667V18.6173H137.689V2.65961H143.7V1.86173H130.737V2.65961H130.696ZM147.994 10.1065H155.355V9.27064H147.994V2.65961H157.727V1.86173H146.972V18.6173H157.89V17.7814H147.994V10.1065ZM168.85 10.2205L173.348 18.6173H172.203L167.828 10.3345C167.378 10.3725 167.051 10.3725 166.805 10.3725H162.348V18.6173H161.326V1.86173H166.928C169.054 1.86173 170.649 2.27967 171.672 3.11554C172.53 3.79944 172.939 4.7873 172.939 6.00312C172.939 7.14295 172.53 8.09282 171.753 8.85271C171.058 9.5366 170.077 9.99254 168.85 10.2205ZM171.876 6.04112C171.876 4.82529 171.426 3.95142 170.568 3.4195C169.75 2.92557 168.523 2.69761 166.887 2.69761H162.348V9.61259H166.764C170.159 9.5746 171.876 8.39677 171.876 6.04112ZM188.888 18.6173H187.743L183.367 10.3345C182.917 10.3725 182.59 10.3725 182.345 10.3725H177.887V18.6173H176.865V1.86173H182.468C184.594 1.86173 186.189 2.27967 187.211 3.11554C188.07 3.79944 188.479 4.7873 188.479 6.00312C188.479 7.14295 188.07 8.09282 187.293 8.85271C186.598 9.5366 185.616 9.99254 184.39 10.2205L188.888 18.6173ZM187.416 6.04112C187.416 4.82529 186.966 3.95142 186.107 3.4195C185.289 2.92557 184.062 2.69761 182.427 2.69761H177.887V9.61259H182.304C185.698 9.5746 187.416 8.39677 187.416 6.04112ZM198.825 16.0337V18.9212H198.007V16.0337H191.791L198.416 0L205.041 16.0337H198.825ZM192.977 15.2738H203.855L198.416 2.12769L192.977 15.2738Z" fill="black"/>
+            </svg>
+
+        </div>
+
+        <!-- Canvas -->
+        <p id="titulo_estudio">ESTUDIO DE CAMPO</p>
+        <div id="contenedor_canvas">
+            <!-- myCanvas -->
+            <canvas id="myCanvas" resize="true" style="position:absolute;"></canvas>
+            <!-- Overlay -->
+            <div class="overlay" id="overlay">
+                <div class="overlay_under">
+                    <!-- Titulo -->
+                    <div class="overlay-title">
+                        <div>#01</div>
+                        <div id="nombre_proyecto">
+                            <p contenteditable style="width: max-content; display: inline-block;">PROYECTO CAMPO CAMPO</p>
+                            <!-- Lapiz -->
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" class="bi bi-pencil" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.125 14.9687V18.8749H4.03125L15.5521 7.35408L11.6458 3.44783L0.125 14.9687ZM18.5729 4.33325C18.9792 3.927 18.9792 3.27075 18.5729 2.8645L16.1354 0.427002C15.7292 0.020752 15.0729 0.020752 14.6667 0.427002L12.7604 2.33325L16.6667 6.2395L18.5729 4.33325Z" fill="#1B1C1E"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Play button -->
+                    <div class="overlay-play-button__overlay">
+                        <div class="overlay-play-button__play">
+                            <svg width="65" height="65" viewBox="0 0 65 65" fill="none" class="bi bi-play-circle-fill" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_207_2367)">
+                                <rect width="65" height="65" rx="32.5" fill="white"/>
+                                <path d="M28.0737 20.956C26.7423 20.1087 25 21.0652 25 22.6433V42.3567C25 43.9348 26.7423 44.8913 28.0738 44.044L43.5628 34.1873C44.7978 33.4014 44.7978 31.5986 43.5628 30.8127L28.0737 20.956Z" fill="#848484"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_207_2367">
+                                <rect width="65" height="65" rx="32.5" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de botones: Crear modelo, Mostrar gráfica, Guardar modelo -->
+        <div class="contenedor_botones">
+            <div style="width: 100%; height: 100%; position: relative; display: flex; justify-content: space-between; align-items: center;">
+                <!-- Contenedor boton crear modelo -->
+                <div id="contenedor_boton1">
+                    <div class="botones" onclick="crearModelo('{{pretrained}}')">
+                        <div class="btn_svg_y_texto" id="id1">
+                            <!-- SVG de crear modelo -->
+                            <svg class="btn_svg" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_207_2204)">
+                                    <path d="M6.25016 10.4062H8.3335V17.6979H6.25016V10.4062ZM14.5835 13.5312H16.6668V17.6979H14.5835V13.5312ZM10.4168 7.28125H12.5002V17.6979H10.4168V7.28125ZM20.8335 7.29167V4.16667H18.7502V7.29167H15.6252V9.375H18.7502V12.5H20.8335V9.375H23.9585V7.29167H20.8335ZM18.7502 19.7917H4.16683V5.20833H16.6668V3.125H4.16683C3.021 3.125 2.0835 4.0625 2.0835 5.20833V19.7917C2.0835 20.9375 3.021 21.875 4.16683 21.875H18.7502C19.896 21.875 20.8335 20.9375 20.8335 19.7917V14.5833H18.7502V19.7917Z" fill="white"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_207_2204">
+                                        <rect width="25" height="25" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <div class="texto_boton_guardar_crear_mostrar">
+                                <span style="color: white;">Crear Modelo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenedor mostrar gráfica -->
+                <div id="contenedor_boton2">
+                    <div class="botones" data-toggle="modal" data-target="#exampleModal">
+                        <div class="btn_svg_y_texto" id="id2">
+                            <!-- SVG mostrar gráfica -->
+                            <svg class="btn_svg" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_207_2219)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.33301 10.4062H6.24967V17.6979H8.33301V10.4062ZM16.6663 13.5312H14.583V17.6979H16.6663V13.5312ZM12.4997 7.28125H10.4163V17.6979H12.4997V7.28125ZM4.16634 19.7917H18.7497V14.5833H20.833V19.7917C20.833 20.9375 19.8955 21.875 18.7497 21.875H4.16634C3.02051 21.875 2.08301 20.9375 2.08301 19.7917V5.20833C2.08301 4.0625 3.02051 3.125 4.16634 3.125H16.6663V5.20833H4.16634V19.7917ZM14.9998 9C15.7075 7.244 17.4543 6 19.4998 6C21.5452 6 23.292 7.244 23.9998 9C23.292 10.756 21.5452 12 19.4998 12C17.4543 12 15.7075 10.756 14.9998 9ZM17.4543 9C17.4543 10.104 18.3707 11 19.4998 11C20.6288 11 21.5452 10.104 21.5452 9C21.5452 7.896 20.6288 7 19.4998 7C18.3707 7 17.4543 7.896 17.4543 9ZM18.2725 9C18.2725 8.336 18.8207 7.8 19.4998 7.8C20.1788 7.8 20.727 8.336 20.727 9C20.727 9.664 20.1788 10.2 19.4998 10.2C18.8207 10.2 18.2725 9.664 18.2725 9Z" fill="white"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_207_2219">
+                                        <rect width="25" height="25" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <div class="texto_boton_guardar_crear_mostrar">
+                                <span style="color: white;">Mostrar Gráfica</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenedor guardar modelo -->
+                <div id="contenedor_boton3">
+                    <div class="botones" onclick="guardarModelo()">
+                        <div class="btn_svg_y_texto" id="id3">
+                            <!-- SVG guardar modelo -->
+                            <svg class="btn_svg" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_207_1558)">
+                                    <path d="M17.7083 3.125H5.20833C4.05208 3.125 3.125 4.0625 3.125 5.20833V19.7917C3.125 20.9375 4.05208 21.875 5.20833 21.875H19.7917C20.9375 21.875 21.875 20.9375 21.875 19.7917V7.29167L17.7083 3.125ZM12.5 19.7917C10.7708 19.7917 9.375 18.3958 9.375 16.6667C9.375 14.9375 10.7708 13.5417 12.5 13.5417C14.2292 13.5417 15.625 14.9375 15.625 16.6667C15.625 18.3958 14.2292 19.7917 12.5 19.7917ZM15.625 9.375H5.20833V5.20833H15.625V9.375Z" fill="white"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_207_1558">
+                                        <rect width="25" height="25" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <div class="texto_boton_guardar_crear_mostrar">
+                                <span style="color: white; position: relative;">Guardar Modelo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container with inputs -->
+        <div class="container_inputs_overall">
+            <!-- Contendor encabezado botones Entorno Especie -->
+            <div class="encabezado_inputs">
+                <div class="btn_inputs_entorno active_btn" active="true"><p class="texto_btn_inputs active_txt" id="texto_btn_inputs_entorno">ENTORNO</p></div>
+                <div class="btn_inputs_especie" active="false" onclick="toggleInputs('especie')"><p class="texto_btn_inputs" id="texto_btn_inputs_especie">ESPECIE</p></div>
+            </div>
+            <!-- Inputs de entorno -->
+            <div class="inputs_entorno">
+                <!-- Contenedor de inputs básicos de entorno y titulo -->
+                <div class="container_input_entorno_basico">
+                    <!-- Titulo -->
+                    <div class = "titulo_clase_entorno">
+                        <!-- Figura -->
+                        <svg class="figuras" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="figuras" fill="#2F8DAB"/>
+                        </svg>
+                        <p class="texto_titulo_entorno" id="entorno_titulo_basicos">BÁSICOS</p>
+                    </div>
+                    <!-- Contenedor inputs -->
+                    <div id="container_inputs_basicos">
+                        <div id="container_input1" class="container_inputs">
+                            <!-- Input de depredadores -->
+                            <div class="container_input_basico" style="order:0">
+                                <div class="container_titulo_input" id="container_depredador">
+                                    <p class="titulo_categoria_input_basico" id="titulo_depredador_categoria_input">
+                                        DEPREDADORES
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <div class="cssToolTip">
+                                        <p  class="descripcion_input">Nº de Depredadores iniciales </p>
+                                        <span> Número de Depredadores iniciales </span>
+                                    </div>
+                                    <input type="number" class="seleccion_input" json_name="n_preds" min="1" value=5>
+                                </div>
+                            </div>
+                            <!-- Input de presas -->
+                            <div class="container_input_basico" style="order:1">
+                                <div class="container_titulo_input" id="container_presa">
+                                    <p class="titulo_categoria_input_basico" id="titulo_presa_categoria_input">
+                                        PRESAS
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <div class="cssToolTip">
+                                        <p  class="descripcion_input"> Nº de Presas iniciales</p>
+                                        <span> Número de presas iniciales </span>
+                                    </div>
+                                    <input type="number" class="seleccion_input" json_name="n_preys" min="1" value=5>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="container_input2" class="container_inputs">
+                            <!-- Inputs de plantas -->
+                            <div class="container_input_basico" style="order:0">
+                                <div class="container_titulo_input" id="container_planta">
+                                    <p class="titulo_categoria_input_basico" id="titulo_planta_categoria_input">
+                                        PLANTAS
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <div class="cssToolTip">
+                                        <p class="descripcion_input"> Nº de Plantas iniciales </p>
+                                        <span> Número de plantas iniciales </span>
+                                    </div>
+                                    <input type="number" class="seleccion_input" json_name="n_grass" min="1" value=1>
+                                </div>
+                            </div>
+                            <!-- Input de cuadricula -->
+                            <div class="container_input_basico" style="order:1">
+                                <div class="container_titulo_input" id="container_cuadricula">
+                                    <p class="titulo_categoria_input_basico" id="titulo_cuadricula_categoria_input">
+                                        CUADRÍCULA
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <div class="cssToolTip">
+                                        <p class="descripcion_input"> Tamaño de la cuadrícula </p>
+                                        <span> Tamaño de la cuadrícula </span>
+                                    </div>
+                                    <input type="number" class="seleccion_input" json_name="size" min="3" value=10>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="container_input_basico_3" class="container_inputs">
+                            <!-- Inputs de plantas -->
+                            <div class="container_input_basico" style="order:0">
+                                <div class="container_titulo_input" id="container_planta">
+                                    <p class="titulo_categoria_input_basico" id="num_iteraciones_input">
+                                        ITERACIONES
+                                    </p>
+                                </div>
+                                <div class="input_basico">
+                                    <div class="cssToolTip">
+                                        <p class="descripcion_input"> Nº de Iteraciones </p>
+                                        <span> Número de iteraciones </span> 
+                                    </div>
+                                    <input type="number" class="seleccion_input" json_name="iters" min="0" max=10000 value=20 step="10">
+                                </div>
+                            </div>
+                            <!-- Input de cuadricula -->
+                            <div class="container_input_basico" style="order:1">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Inputs biologicos -->
+                <div class="input_entorno_biologico">
+                    <!-- Titulo -->
+                    <div class = "titulo_clase_entorno">
+                        <!-- Figura -->
+                        <svg class="figuras" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="figuras" cx="12.5" cy="12.5" r="12.5" fill="#2F8DAB"/>
+                        </svg>
+                        <p class="texto_titulo_entorno" id="entorno_titulo_biologicos"> BIOLÓGICOS </p>
+                    </div>
+                    <!-- Input de regeneracion de alimento -->
+                    <div id="container_input3" class="container_inputs">
+                        <div class="container_input_basico" style="order:0">
+                            <div class="input_basico">
+                                <div class="cssToolTip">
+                                    <p class="descripcion_input">Regeneración del Alimento básico</p>
+                                    <span> Número de hierbas nuevas cada turno </span>
+                                </div>
+                                <input type="number" class="seleccion_input" json_name="food_regen" min="0" max="100" value=1 >
+                            </div>
+                        </div>
+                        <!-- Inout de agrupamiento de alimento -->
+                        <div class="container_input_basico" style="order:1">
+                            <div class="input_basico">
+                                <div class="cssToolTip">
+                                    <p class="descripcion_input">Tasa de Agrupamiento del Alimento básico</p>
+                                    <span> No se que va aquí </span>
+                                </div>
+                                <input type="number" class="seleccion_input" json_name="cluster_prob" min="0" max="1" step="0.01" value=1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de los inputs de especie -->
+        <div id="filtrosEspecie" style="visibility: hidden;">
+            <!-- Contendor encabezado botones Entorno Especie -->
+            <div class="encabezado_inputs">
+                <div class="btn_inputs_entorno" active="false" onclick="toggleInputs('entorno')"><p class="texto_btn_inputs" id="texto_btn_inputs_entorno">ENTORNO</p></div>
+                <div class="btn_inputs_especie active_btn" active="true"><p class="texto_btn_inputs active_txt" id="texto_btn_inputs_especie">ESPECIE</p></div>
+            </div>
+            <!-- Contenedor de las tres secciones de los inputs de depredador -->
+            <div id="frame14" class="inputs_depredadores">
+                <!-- Contenedor de inputs básicos -->
+                <div class = "basicos">
+                    <!-- Titulo -->
+                    <div class="frame18">
+                        <!-- Figura -->
+                        <svg class = "figuras" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="25" height="25" class="figuras" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BÁSICOS </h2>
+                    </div>
+                    <!-- Input basico: depredador o presa actuan como botones -->
+                    <div class = "frame46">
+                        <div class = "frame43">
+                            <div class="divsBasicos activo" id="divsBasicosDepredadores">
+                                <p class = "textoFrame46">Depredadores</p>
+                            </div>
+                        </div>
+                        <div class="frame44">
+                            <div class="divsBasicos" id="divsBasicosPresas" onclick="toggleInputsAgentes('presas')">
+                                <p class = "textoFrame46">Presas</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Contenedor de inputs biologicos -->
+                <div class ="Biologicos">
+                    <!-- Titulo -->
+                    <div class="textBiologicos">
+                        <!-- Figura -->
+                        <svg class="figuras" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="figuras" cx="12.5" cy="12.5" r="12.5" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BIOLÓGICOS </h2>
+                    </div>
+                    <!-- Input biologicos -->
+                    <div class="contentBiologicos">
+                        <!-- Slider de energia maxima -->
+                        <div class="energiaMaxima1">
+                            <div class="energiaMaxima2">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Energía Máxima</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <div class="sliderEnergiaMaxima">
+                                    <input class="inputSlider" type="range" min="0" value="20" max="20" step="1" onchange="cambiar_valor('pNumSlider1', this.value)" json_name="energia_depredador">
+                                </div>
+                                <div class ="numeroSlider">
+                                    <p id="pNumSlider" class="pNumSlider1" >100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contenedor de inputs biologicos -->
+                        <div class="subContentBiologicos">
+                            <!-- Contenedor de inputs de la izquierda -->
+                            <div id="izqContentBiologicos">
+                                <!-- Inputs de la izquierda -->
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Movimiento</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="coste_movimiento_depredador" class ="input" type="number" min=0 max=100 value=1>
+                                </div>
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Reproduccion</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="coste_reproduccion_depredador" class ="input" type="number" min=0 max=100 value=50>
+                                </div>
+                            </div>
+                            <!-- Contenedor de inputs de la derecha -->
+                            <div id="dchaContentBiologicos">
+                                <!-- Inputs de la derecha -->
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Recuperacion al comer</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="recuperacion_comer_depredador" class ="input" type="number" min=0 max=100 value=40>
+                                </div>
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Energia mínima de reproduccion</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="energia_min_reproduccion_depredador" class ="input" type="number" min=0 max=100 value=51>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Contenedor de inputs biologicos -->
+                <div class = "informaticos">
+                    <!-- Titulo -->
+                    <div class="textInformaticos">
+                        <!-- Figura -->
+                        <svg class="figuras" width="29" height="25" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="figuras" d="M14.4338 0L28.8675 25H0L14.4338 0Z" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> INFORMÁTICOS </h2>
+                    </div>
+                    <!-- Contenedor de inputs informaticos -->
+                    <div class="contentInformaticos">
+                        <!-- Contenedor de inputs de la izquierda -->
+                        <div id ="izqContentInformaticos">
+                            <!-- Inputs de la izquierda -->
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Exploración</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <input json_name="exploration_rate_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Learning Rate</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <input json_name="learning_rate_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Discount Factor</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <input json_name="discount_factor_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Cobardía</p>
+                                    <span> Recompensa por huir de los depredadores</span>
+                                </div>
+                                <input json_name="cobardia_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Miedo</p>
+                                    <span> Castigo por aproximarse a depredadores</span>
+                                </div>
+                                <input json_name="miedo_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                        </div>
+                        <!-- Contenedor de inputs de la derecha -->
+                        <div id ="dchaContentInformaticos">
+                            <!-- Inputs de la derecha -->
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Avaricia</p>
+                                    <span> Recompensa por aproximarse a las presas</span>
+                                </div>
+                                <input json_name="avaricia_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Ignorancia</p>
+                                    <span> Castigo por huir de las presas</span>
+                                </div>
+                                <input json_name="ignorancia_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Colonialismo</p>
+                                    <span> Recompensa por aproximarse a otros individuos de mi especie</span>
+                                </div>
+                                <input json_name="colonialismo_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Independencia</p>
+                                    <span> Castigo por huir de individuos de mi especie</span>
+                                </div>
+                                <input json_name="independencia_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Hambre</p>
+                                    <span> No sé que va aquí</span>
+                                </div>
+                                <input json_name="hambre_depredador" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Contenedor de las tres secciones de los inputs de presa -->
+            <div id="frame14" style="visibility: hidden;" class="inputs_presas">
+                <!-- Contenedor de inputs básicos -->
+                <div class = "basicos">
+                    <!-- Titulo -->
+                    <div class="frame18">
+                        <!-- Figura -->
+                        <svg class = "figuras" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="25" height="25" class="figuras" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BÁSICOS </h2>
+                    </div>
+                    <!-- Input basico: depredador o presa actuan como botones -->
+                    <div class = "frame46">
+                        <div class = "frame43">
+                            <div class="divsBasicos" id="divsBasicosDepredadores" onclick="toggleInputsAgentes('depredadores')">
+                                <p class = "textoFrame46">Depredadores</p>
+                            </div>
+                        </div>
+                        <div class="frame44">
+                            <div class="divsBasicos activo" id="divsBasicosPresas">
+                                <p class = "textoFrame46">Presas</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Contenedor de inputs biologicos -->
+                <div class ="Biologicos">
+                    <!-- Titulo -->
+                    <div class="textBiologicos">
+                        <!-- Fugura -->
+                        <svg class="figuras" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="figuras" cx="12.5" cy="12.5" r="12.5" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> BIOLÓGICOS </h2>
+                    </div>
+                    <!-- Input biologico -->
+                    <div class="contentBiologicos">
+                        <!-- Slider de energia maxima -->
+                        <div class="energiaMaxima1">
+                            <div class="energiaMaxima2">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Energía Máxima</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <div class="sliderEnergiaMaxima">
+                                    <input class="inputSlider" type="range" min="0" value="20" max="20" step="1" onchange="cambiar_valor('pNumSlider2', this.value)" json_name="energia_presa">
+                                </div>
+                                <div class ="numeroSlider">
+                                    <p id="pNumSlider" class="pNumSlider2">100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contenedor de inputs biologicos -->
+                        <div class="subContentBiologicos">
+                            <!-- Contenedor de inputs de la izquierda -->
+                            <div id="izqContentBiologicos">
+                                <!-- Inputs de la izquierda -->
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Movimiento</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="coste_movimiento_presa" class ="input" type="number" min=0 max=100 value=1>
+                                </div>
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Coste de Reproduccion</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="coste_reproduccion_presa" class ="input" type="number" min=0 max=100 value=50>
+                                </div>
+                            </div>
+                            <!-- Contenedor de inputs de la derecha -->
+                            <div id="dchaContentBiologicos">
+                                <!-- Inputs de la derecha -->
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Recuperacion al comer</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="recuperacion_comer_presa" class ="input" type="number" min=0 max=100 value=40 >
+                                </div>
+                                <div class = "content_">
+                                    <div class="cssToolTip">
+                                        <p class="textContent">Energia mínima de reproduccion</p>
+                                        <span> No se que va aqui </span>
+                                    </div>
+                                    <input json_name="energia_min_reproduccion_presa" class ="input" type="number" min=0 max=100 value=51>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Contenedor de inputs informaticos -->
+                <div class = "informaticos">
+                    <!-- Titulo -->
+                    <div class="textInformaticos">
+                        <!-- Figura -->
+                        <svg class="figuras" width="29" height="25" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="figuras" d="M14.4338 0L28.8675 25H0L14.4338 0Z" fill="#2F8DAB"/>
+                        </svg>
+                        <h2 class = "textoh2"> INFORMÁTICOS </h2>
+                    </div>
+                    <!-- Contenedor de inputs informaticos -->
+                    <div class="contentInformaticos">
+                        <!-- Contenedor de inputs de la izquierda -->
+                        <div id ="izqContentInformaticos">
+                            <!-- Inputs de la izquierda -->
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Exploración</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <input json_name="exploration_rate_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Learning Rate</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <input json_name="learning_rate_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Discount Factor</p>
+                                    <span> No se que va aqui </span>
+                                </div>
+                                <input json_name="discount_factor_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Cobardía</p>
+                                    <span> Recompensa por huir de los depredadores</span>
+                                </div>
+                                <input json_name="cobardia_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Miedo</p>
+                                    <span> Castigo por aproximarse a depredadores</span>
+                                </div>
+                                <input json_name="miedo_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                        </div>
+                        <!-- Contenedor de inputs de la derecha -->
+                        <div id ="dchaContentInformaticos">
+                            <!-- Inputs de la derecha -->
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Avaricia</p>
+                                    <span> Recompensa por aproximarse a las presas</span>
+                                </div>
+                                <input json_name="avaricia_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Ignorancia</p>
+                                    <span> Castigo por huir de las presas</span>
+                                </div>
+                                <input json_name="ignorancia_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent"> Índice de Colonialismo</p>
+                                    <span> Recompensa por aproximarse a otros individuos de mi especie</span>
+                                </div>
+                                <input json_name="colonialismo_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Independencia</p>
+                                    <span> Castigo por huir de individuos de mi especie</span>
+                                </div>
+                                <input json_name="independencia_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                            <div class = "content_">
+                                <div class="cssToolTip">
+                                    <p class="textContent">Indice de Hambre</p>
+                                    <span> No sé que va aquí</span>
+                                </div>
+                                <input json_name="hambre_presa" class ="input" type="number" min=0 max=1 step="0.01" value=1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Boton que se usará para pasar de iteraciones escondido para el usuario pero que se clickeará automaticamente -->
+        <button id="btn_siguiente" class="btn btn-secondary" style="visibility: hidden;">Siguiente step</button>
+
+
+
+
+        <!-- Modal con la gráfica-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="align-items: center; margin-right: 2%;">
+                                <svg class="btn_svg" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_207_2219)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.33301 10.4062H6.24967V17.6979H8.33301V10.4062ZM16.6663 13.5312H14.583V17.6979H16.6663V13.5312ZM12.4997 7.28125H10.4163V17.6979H12.4997V7.28125ZM4.16634 19.7917H18.7497V14.5833H20.833V19.7917C20.833 20.9375 19.8955 21.875 18.7497 21.875H4.16634C3.02051 21.875 2.08301 20.9375 2.08301 19.7917V5.20833C2.08301 4.0625 3.02051 3.125 4.16634 3.125H16.6663V5.20833H4.16634V19.7917ZM14.9998 9C15.7075 7.244 17.4543 6 19.4998 6C21.5452 6 23.292 7.244 23.9998 9C23.292 10.756 21.5452 12 19.4998 12C17.4543 12 15.7075 10.756 14.9998 9ZM17.4543 9C17.4543 10.104 18.3707 11 19.4998 11C20.6288 11 21.5452 10.104 21.5452 9C21.5452 7.896 20.6288 7 19.4998 7C18.3707 7 17.4543 7.896 17.4543 9ZM18.2725 9C18.2725 8.336 18.8207 7.8 19.4998 7.8C20.1788 7.8 20.727 8.336 20.727 9C20.727 9.664 20.1788 10.2 19.4998 10.2C18.8207 10.2 18.2725 9.664 18.2725 9Z" fill="black"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_207_2219">
+                                            <rect width="25" height="25" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                        </div>
+                        <div>
+                            <h5 class="modal-title" id="exampleModalLabel" style="font-family: 'Jura';">GRÁFICA DE LA SIMULACIÓN</h5>
+                        </div>
+                        
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="fig02"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modelo_id" modelo_id="{{modelo}}" style="visibility:hidden">
+
+        </div>
+        <div id="pretrained" pretrained="{{pretrained}}" style="visibility:hidden">
+
+        </div>
+        <div id="configuration" configuration="{{configuration}}" style="visibility:hidden">
+
+        </div>
+    </body>
+
+    <script type="text/javascript" src = "../static/simulacion_js.js" canvas = "myCanvas">
+    </script>
+
+</html>

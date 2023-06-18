@@ -1,0 +1,6 @@
+projectKey=VerificacionEjercicioI_Correcto3
+serverUrl=http://localhost:9000
+serverVersion=10.0.0.68432
+dashboardUrl=http://localhost:9000/dashboard?id=VerificacionEjercicioI_Correcto3
+ceTaskId=AYeAkj8TdZJp6YN08MXq
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYeAkj8TdZJp6YN08MXq

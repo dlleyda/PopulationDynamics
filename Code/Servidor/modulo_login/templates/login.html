@@ -1,0 +1,49 @@
+{% extends 'baseLogIn.html' %}
+{% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
+{% endif %}
+
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+   {% if form %}
+       <body class="login-body">
+            <h1 class="titulo text-center mx-auto">BIENVENIDO A</h1>
+            <img src="../../static/assets/Banner.png" class="banner">
+
+
+            <form class="form-signin text-center mx-auto" method="POST" action="{{url_for('modulo_login.login', nextpath=nextpath)}}">
+                <input type="hidden" name="nextpath" value="{{nextpath}}">
+                {{ form.hidden_tag() }}
+                <div class="login-form mx-auto">
+                    <div class="elemento-form">
+                        {{ wtf.form_field(form.username_or_email) }}
+                    </div>
+                    <div class="elemento-form">
+                        {{ wtf.form_field(form.password) }}
+                        {{ wtf.form_field(form.show_password) }}
+                    </div>
+                </div>
+
+                <div class="mx-auto">
+                    {{ wtf.form_field(form.submit, class="btn boton-login") }}
+                </div>
+            </form>
+            {% endif %}
+
+            <script>
+                $("#check").on("click",
+                        function() {
+                            if($(this).is(':checked')) {
+                                $("#password").attr("type","text");
+                            }
+                            else {
+                                $("#password").attr("type","password");
+                            }
+                        }
+                    );
+            </script>
+    </body>
+
+{% endblock %}

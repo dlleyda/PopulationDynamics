@@ -1,0 +1,72 @@
+<html lang="es">
+    <head>
+        <title>Trophic Terra</title>
+        <meta charset="UTF-8"/>
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+        <!-- Bootsrtrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <!-- Highcharts -->
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/highcharts-more.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../static/css/styleLanding.css">
+    </head>
+
+    <body onload=ajaxCall()>
+
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <div class="container-fluid">
+                <img src="../static/assets/Logo.png" height="50px" alt="Logo">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex justify-content-end">
+                        {% block navbarli %}
+                            <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="{{url_for('index')}}">Sobre</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="{{url_for('modulo_login.login')}}">Log in</a></li>
+                            <li class="nav-item"><a class="nav-link text-dark elemento-navbar" href="{{url_for('modulo_login.signup')}}" style="margin-right: 80px">Sign up</a></li>
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                {{message}}
+            </div>
+        {% endfor %}
+        </div>
+
+        {% block content %}{% endblock %}
+    </body>
+
+        <script type="text/javascript">
+        var my_width = $(document).width();
+        var my_height = $(document).height();
+
+        var rel_prop_width = my_width/1440;
+        var rel_prop_height = my_height/800;
+
+        // set CSS variable
+        document.documentElement.style.setProperty(`--rel_prop_width`, `${rel_prop_width}`);
+        document.documentElement.style.setProperty(`--rel_prop_height`, `${rel_prop_height}`);
+
+
+        $(".apartado path").attr("fill", "#1B1C1E");
+        $(".apartado_active path").attr("fill", "#2F8DAB");
+        $(".overlay-play-button__overlay").attr("onclick","setTrainingMode(); var_ajaxCall()");
+
+        $("#crearModelo").css({"position": "absolute", "right":"10%", "bottom":"2%"})
+        $("#btn_grafica").css({"position": "absolute", "right":"30%", "bottom":"2%"})
+    </script>
+
+</html>

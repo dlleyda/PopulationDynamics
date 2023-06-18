@@ -1,0 +1,1468 @@
+@import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jura&display=swap');
+
+:root {
+    --rel_prop_width: 0;
+    --rel_prop_height: 0;
+}
+
+
+input[type=number]::-webkit-inner-spin-button{
+    cursor: pointer;
+    display: block;
+    height: calc(var(--rel_prop_height)*30px);
+    width: calc(var(--rel_prop_width)*30px);
+    background: transparent;    
+    opacity: 1;
+}
+
+/* **************** Clase para enseñar que está deshabilitado */
+.disabled_class::-webkit-inner-spin-button{
+    opacity: 0.4;
+}
+
+
+p {
+    margin-bottom: 0;
+}
+
+/* ******************************** Empieza el estilo del navbar ******************************** */
+
+/* Clase que representa el contenedor del navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    width: calc(var(--rel_prop_width)*265px);
+    /* width: 265 * 1029 / 1440; width of 265/1440 of the viewport width */
+    background-color: #DCEDF2;
+    border-right: 1px solid #ddd;
+    z-index: 1; /* ensure the navbar appears above other elements */
+    
+}
+
+/* Clase que representa el contenedor de la seccion del medio del navbar (mi unidad, simulacion, informacion) */
+.navegacion {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--rel_prop_height)*42px) calc(var(--rel_prop_width)*0px);
+    gap: calc(var(--rel_prop_height)*30px) calc(var(--rel_prop_width)*30px);
+
+    position: absolute;
+    width: calc(var(--rel_prop_width)*222px);
+    left: calc(50% - var(--rel_prop_width)*222px/2 - 0.5px);
+    top: 18.12%;
+    bottom: 19.38%;
+
+    border-top: calc(var(--rel_prop_width)*3px) solid #2F8DAB;
+}
+
+/* Clase que representa el estilo para cada apartado del contenido del medio (mi unidad, simulacion, informacion) */
+.apartado {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    padding: calc(var(--rel_prop_height)*0px) calc(var(--rel_prop_width)*12px);
+    gap: calc(var(--rel_prop_height)*15px) calc(var(--rel_prop_width)*15px);
+    
+    width: calc(var(--rel_prop_width)*(222px));
+    height: calc(var(--rel_prop_height)*(40px));
+    
+    flex: none;
+    flex-grow: 0;
+}
+
+/* Estilo para los svg del navbar, por ejemplor el icono de perfil, el logo, la carpeta, info y simulacion */
+.bi-person-circle {
+    position: absolute;
+    width: calc(var(--rel_prop_height)*(65px));
+    height: calc(var(--rel_prop_height)*(65px));
+    top: 5%;
+    left: calc(50% - var(--rel_prop_height)*65px/2);
+}
+
+.bi-logotipo {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(205.04px));
+    height: calc(var(--rel_prop_height)*(19.19px));
+    left: calc(50% - var(--rel_prop_width)*205.04px/2);
+    bottom: 6%;
+}
+
+/* Clase que representa el icono de cada subapartado del contenido del centro (la carpeta, los puntitos, info) */
+.icono_apartado {
+    width: calc(var(--rel_prop_width)*(40px));
+    height: calc(var(--rel_prop_height)*(40px));
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+/* Clase  que representa el texto de cada subapartado del contenido del centro (mi unidad, simulacion, informacion) */
+.texto_apartado {
+    width: calc(var(--rel_prop_width)*(143px));
+    height: calc(var(--rel_prop_height)*(40px));
+    margin-bottom: 0;
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(var(--rel_prop_height)*(20px));
+    line-height: calc(var(--rel_prop_height)*(23px));
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    color: #1B1C1E;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+/* Clase para representar la sección que esté activa en el caso para el html de simulacion, la seccion activa es simulacion */
+.apartado_active {
+    box-sizing: border-box;
+    border-left: 3px solid #2F8DAB;
+}
+.apartado_active p {
+    color: #2F8DAB;
+}
+/* ******************************** Fin Estilo para el navbar ******************************** */
+
+
+
+/* ************************* Empieza el estilo del canvas y overlay ************************* */
+
+/* Identificador del texto del titulo del estudio */
+#titulo_estudio {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(293px));
+    height: calc(var(--rel_prop_height)*(35px));
+    left: calc(var(--rel_prop_width)*(297px));
+    top: calc(var(--rel_prop_height)*(41px));
+
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 700;
+    font-size: calc(var(--rel_prop_height)*(30px));
+    line-height: calc(var(--rel_prop_height)*(35px));
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+
+    color: #2F8DAB;
+
+}
+
+/* Identificador del canvas */
+#myCanvas {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(500px));
+    height: calc(var(--rel_prop_width)*(500px));
+    left: calc(var(--rel_prop_width)*(265px + 32px));
+    top: calc(var(--rel_prop_height)*(91px));
+
+    background: #D9D9D9;
+    border: 1px solid #ddd;
+    border-radius: calc(var(--rel_prop_width)*(20px));
+    z-index: 0; /* ensure the canvas appears behind other elements */
+}
+/* Clase contenedora del overlay para el canvas */
+.overlay{
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(500px));
+    height: calc(var(--rel_prop_width)*(500px));
+    left: calc(var(--rel_prop_width)*(265px + 32px));
+    top: calc(var(--rel_prop_height)*(91px));
+
+    border: 1px solid #ddd;
+    border-radius: calc(var(--rel_prop_width)*(20px));
+    z-index: 10; /* ensure the overlay appears above other elements */
+
+    background-image: linear-gradient(137deg, #b1b1b11a, #54545444);
+}
+/* Clase que identifica el subcontenedor del overlay con posición relativa para poder manipular los contenidos del overlay mejor (como el boton de play o titulo)*/
+.overlay_under {
+    position: relative;
+    width: calc(var(--rel_prop_width)*(500px));
+    height: calc(var(--rel_prop_width)*(500px));
+    display: flex;
+    align-items: flex-end;
+}
+/* Clase que representa el boton de play */
+.overlay-play-button__overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    
+    align-self: flex-end;
+    justify-content: right;
+    margin-right: 8%;
+    margin-bottom: 5%;
+}
+/* Clase que representa al texto dentro del overlay */
+.overlay-title {
+    font-family: 'Karla', Impact, sans-serif;
+    width: 66%;
+    font-size: calc(var(--rel_prop_width)*(20px));
+
+    align-self: flex-end;
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+.overlay-title svg:hover {
+    cursor: pointer;
+}
+
+/* Clase que repreesenta al svg del icono del play */
+.bi-play-circle-fill {
+    width: calc(var(--rel_prop_width)*(65px));
+    height: calc(var(--rel_prop_width)*(65px));
+}
+.bi-play-circle-fill:hover {
+    cursor: pointer;
+}
+/* Clase que representa al svg del icono del lapiz */
+.bi-pencil {
+    width: calc(var(--rel_prop_width)*(18.75px));
+    height: calc(var(--rel_prop_height)*(18.75px));
+}
+
+/* ************************* Fin el estilo del canvas y overlay ************************* */
+
+
+
+/* ************************* Empieza el estilo de los botones de Guardar, Crear y Mostrar ************************* */
+/* Contenedor de todos los elementos que rodean a esos botones */
+.contenedor_botones {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(500px));
+    height: calc(var(--rel_prop_height)*(63px));
+    left: calc(var(--rel_prop_width)*(297px));
+    top: calc(var(--rel_prop_width)*(500px) + var(--rel_prop_height)*(91px + 15px));
+
+    background: #2F8DAB;
+    border-radius:  calc(var(--rel_prop_height)*(46px));
+}
+/* Contenedor del boton 1 -> Crear modelo que tendrá q estar en la izquierda (justify-content start) */
+#contenedor_boton1 {
+    display: flex; 
+    justify-content: start; 
+    width: 33.3%; 
+    margin-left: calc(var(--rel_prop_width)*(8px));
+}
+/* Contenedor del boton 2 -> Mostrar gráfica que tendrá q estar en el centro (justify-content center) */
+#contenedor_boton2 {
+    display: flex; 
+    justify-content: center; 
+    width: 33.3%;
+}
+/* Contenedor del boton 3 -> Guardar modelo que tendrá q estar en la derecha (justify-content end) */
+#contenedor_boton3 {
+    display: flex; 
+    justify-content: end; 
+    width: 33.3%; 
+    margin-right: calc(var(--rel_prop_width)*(8px));
+}
+
+/* Clase que representa a los botones con animaciones */
+.botones {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background: #1B1C1E;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+    border-radius: calc(var(--rel_prop_width)*(50px));
+    padding: calc(var(--rel_prop_height)*(9px));
+    gap: calc(var(--rel_prop_height)*5px) calc(var(--rel_prop_width)*5px);
+    transition: 0.2s;
+    text-decoration: none;
+
+    width:  calc(var(--rel_prop_height)*(50px));
+    height: calc(var(--rel_prop_height)*(50px));
+}
+
+.botones:hover {
+    width: 100%;
+}
+
+.botones:hover .btn_svg_y_texto {
+    width: 100%;
+}
+/* Clase que representa al contenedor del svg y el texto (el boton en sí) */
+.btn_svg_y_texto {
+    display: flex; 
+    flex-direction: row;
+}
+
+.botones:hover .texto_boton_guardar_crear_mostrar {
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0.25s;
+
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+
+    color: #FFFFFF;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* Clase que representa al svg del boton */
+.btn_svg {
+    width: calc(var(--rel_prop_width)*(25px));
+    height: calc(var(--rel_prop_width)*(25px));
+}
+/* Clase que representa al texto del boton */
+.texto_boton_guardar_crear_mostrar {
+    width: calc(100% - var(--rel_prop_width)*(25px));
+    visibility: hidden;
+    opacity: 0;
+    white-space: nowrap;
+    transition: 0.2s;
+
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(var(--rel_prop_width)*(17px));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+
+    color: #FFFFFF;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+/* ************************* Fin del estilo de los botones de Guardar, Crear y Mostrar ************************* */
+
+
+
+/* ******************************** Start Style para la seccion de ENTORNO ******************************** */
+
+/* Contenedor padre */
+.container_inputs_overall {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(572px));
+    height: calc(var(--rel_prop_height)*(540px));
+    left: calc(var(--rel_prop_width)*(829px));
+    top: calc(var(--rel_prop_height)*(91px));
+
+    overflow-y:auto;
+
+    background: #FFFFFF;
+    box-shadow: calc(var(--rel_prop_width)*(0px)) calc(var(--rel_prop_height)*(4px)) 4px rgba(0, 0, 0, 0.15);
+    border-radius: calc(var(--rel_prop_height)*(20px));
+}
+
+/* Contenedor de los encabezados */
+.encabezado_inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*20px) calc(var(--rel_prop_width)*0px);
+    gap: calc(var(--rel_prop_height)*127px) calc(var(--rel_prop_width)*127px);
+
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(515px));
+    height: calc(var(--rel_prop_height)*(83px));
+    left: calc(var(--rel_prop_width)*(32px));
+    top: calc(var(--rel_prop_height)*(0px));
+}
+
+/* Contenedor del boton ENTORNO del encabezado */
+.btn_inputs_entorno {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*20px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(125px));
+    height: calc(var(--rel_prop_height)*(43px));
+    
+    border-radius: 65px;
+    border: 1px solid #2F8DAB;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.btn_inputs_entorno.active_btn {
+    background: #2F8DAB;
+}
+
+.btn_inputs_entorno:hover {
+    cursor: pointer;
+}
+
+
+#texto_btn_inputs_entorno {
+    width: calc(var(--rel_prop_width)*(85px));
+    color: #2F8DAB;
+}
+#texto_btn_inputs_entorno.active_txt {
+    color: #FFFFFF;
+}
+
+#texto_btn_inputs_especie {
+    width: calc(var(--rel_prop_width)*(73px));
+    color: #2F8DAB;
+}
+#texto_btn_inputs_especie.active_txt {
+    color: #FFFFFF;
+}
+
+
+.texto_btn_inputs {
+    height: calc(var(--rel_prop_height)*(23px));
+    margin-bottom: 0;
+    justify-content: center;
+
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(var(--rel_prop_height)*(21px));
+    line-height: calc(var(--rel_prop_height)*(23px));
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+/* Contenedor del boton ESPECIE del encabezado */
+.btn_inputs_especie {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*20px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(113px));
+    height: calc(var(--rel_prop_height)*(43px));
+
+    border-radius: 65px;
+    border: 1px solid #2F8DAB;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.btn_inputs_especie.active_btn {
+    background: #2F8DAB;
+}
+
+.btn_inputs_especie:hover {
+    cursor: pointer;
+}
+
+
+
+/* Contenedor que contiene a todo lo que NO es encabezado */
+.inputs_entorno {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--rel_prop_height)*20px) calc(var(--rel_prop_width)*0px) calc(var(--rel_prop_height)*0px);
+    gap: calc(var(--rel_prop_height)*20px) calc(var(--rel_prop_width)*20px);
+
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(318px));
+    left: calc(var(--rel_prop_width)*(32px));
+    top: calc(var(--rel_prop_height)*(83px));
+
+    border-top: calc(var(--rel_prop_width)*(3px)) solid #2F8DAB;
+}
+
+/********** Start BASICO ******** */
+/* Contenedor que contiene a todo lo relacionado con la sección de BÁSICO */
+.container_input_entorno_basico {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--rel_prop_height)*0);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(288px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+/*contenedor del titulo BASICO*/
+.titulo_clase_entorno {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*0);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    height: calc(var(--rel_prop_height)*(25px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#entorno_titulo_basicos {
+    width: calc(var(--rel_prop_width)*(83px));
+    height: calc(var(--rel_prop_width)*(23px));
+}
+
+/*contenedor de arriba de la division en 2 mencionada justo arriba (fila 1)*/
+#container_input1{
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(81px));
+}
+
+/*contenedor de abajo de la division en 2 mencionada justo arriba (fila 2)*/
+
+#container_input2{
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(81px));
+}
+/*contenedor de abajo de la division en 3 mencionada justo arriba (fila 3)*/
+#container_input_basico_3{
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(81px));
+}
+
+
+/*contenedor que sirve para los 4 divs de cada uno de los subtitulos dentro de la parte de BASICOS*/
+.container_titulo_input {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*15px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(136px));
+    height: calc(var(--rel_prop_height)*(35px));
+    background: #FFFFFF;
+
+    border: 1px solid #2F8DAB;
+    border-radius: calc(var(--rel_prop_height)*(59px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* 4 divs particulare para cada uno de los subtitulos de la sección de BÁSICOS*/
+#container_depredador {
+    width: calc(var(--rel_prop_width)*(136px));
+    height: calc(var(--rel_prop_height)*(35px));
+}
+
+#container_presa {
+    width: calc(var(--rel_prop_width)*(82px));
+    height: calc(var(--rel_prop_height)*(35px));
+}
+#container_planta {
+    width: calc(var(--rel_prop_width)*(87px));
+    height: calc(var(--rel_prop_height)*(35px));
+}
+#container_cuadricula {
+    width: calc(var(--rel_prop_width)*(113px));
+    height: calc(var(--rel_prop_height)*(35px));
+}
+/*------------------------------------------------------------------*/
+
+/*titulos (letra)  de cada subtitulo*/
+.titulo_categoria_input_basico {
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(var(--rel_prop_height)*(15px));
+    justify-content: center;
+    line-height: calc(var(--rel_prop_height)*(18px));
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+
+    color: #2F8DAB;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#titulo_depredador_categoria_input {
+    width: calc(var(--rel_prop_width)*(106px));
+    height: calc(var(--rel_prop_height)*(18px));
+}
+
+#titulo_presa_categoria_input{
+    width: calc(var(--rel_prop_width)*(52px));
+    height: calc(var(--rel_prop_height)*(18px));
+}
+
+#titulo_planta_categoria_input {
+    width: calc(var(--rel_prop_width)*(106px));
+    height: calc(var(--rel_prop_height)*(18px));
+}
+
+#titulo_cuadricula_categoria_input{
+    width: calc(var(--rel_prop_width)*(83px));
+    height: calc(var(--rel_prop_height)*(18px));
+}
+/*------------------------------------------------------------------*/
+/********** End BASICO ******** */
+
+
+
+
+/********** Start BIOLOGICO ******** */
+/* Contenedor que contiene a todo lo relacionado con la sección de BIOLOGICO */
+.input_entorno_biologico {
+    display: flex;
+    margin-top: calc(var(--rel_prop_height)*(30px));
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--rel_prop_height)*0);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(71px));
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/*contenedor que contiene a todo lo relacionado con BIOLOGICOS menos el titulo*/
+#container_input3{
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(36px));
+}
+
+
+#titulo_clase_biologico {
+    width: calc(var(--rel_prop_width)*(150px));
+}
+
+/* clase para figuras de cuadrado y circulo de los titulos basico biologico*/
+.figuras {
+    width: calc(var(--rel_prop_height)*(30px));
+    height: calc(var(--rel_prop_height)*(30px));
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*clase del titulo de basico*/
+.texto_titulo_entorno {
+    font-family: 'Karla';
+    font-style: normal;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: calc(var(--rel_prop_height)*(21px));
+    line-height: calc(var(--rel_prop_width)*(23px));
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+
+    color: #000000;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/*parrafo titutlo basicos y biologicos respectivamente*/
+#entorno_titulo_basicos {
+    width: calc(var(--rel_prop_width)*(83px));
+    height: calc(var(--rel_prop_width)*(23px));
+}
+#entorno_titulo_biologicos {
+    width: calc(var(--rel_prop_width)*(115px));
+    height: calc(var(--rel_prop_width)*(23px));
+}
+
+/*contenedor de todo lo de dentro de basico MENOS el titulo*/
+
+/********** End BASICO ******** */
+
+/********** Start AMBAS (BASCO Y BIOLOGICO) ******** */
+
+/* (clase de) contenedor que divide el subcontenido de BASICO en dos partes (dos filas)
+y el de BIOLOGICO en 1 fila */
+.container_inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*0);
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*contenedor que divide cada fila mencionada arriba en dos columnas. También es clase
+del contenedor container_input3, con la misma funcionalidad*/
+.container_input_basico {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*0px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    
+    width: calc(var(--rel_prop_width)*(254px));
+    height: calc(var(--rel_prop_height)*(81px));
+
+    flex: none;
+    flex-grow: 0;
+}
+/*clase de contenedor que contiene al subcontenido de cada apartado; tanto en BASICO como en BIOLOGICO*/
+.input_basico {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(36px));
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+/*contenedor que hace referencia al texto del subcontenido mencionado justo arriba, es deicr,
+al texto de al lado de todas las cajitas*/
+.descripcion_input {
+    width: calc(var(--rel_prop_width)*(170px));
+    height: calc(var(--rel_prop_height)*(36px));
+
+    font-family: 'Jura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(var(--rel_prop_height)*(15px));
+    line-height: calc(var(--rel_prop_height)*(18px));
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    color: #000000;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*clase de divs que contienen a las cajitas*/
+.seleccion_input {
+    box-sizing: border-box;
+
+    width: calc(var(--rel_prop_width)*(50px));
+    height: calc(var(--rel_prop_height)*(30px));
+
+    border: 1px solid #1B1C1E;
+    border-radius: calc(var(--rel_prop_height)*(5px));
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+
+.container_inputs_biologicos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(36px));
+
+    flex: none;
+    flex-grow: 0;
+}
+
+/********** End BASICO ******** */
+
+
+/* ******************************** End Style para la seccion de ENTORNO ******************************** */
+
+
+/* ******************************** Start Style para la seccion de ESPECIE ******************************** */
+
+/* contenedor padre*/
+#filtrosEspecie {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(572px));
+    height: calc(var(--rel_prop_height)*(630px));
+    left: calc(var(--rel_prop_width)*(829px));
+    top: calc(var(--rel_prop_height)*(90px));
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+/* Container encabezado de los botones ENTORNO y ESPECIE*/
+#frame42 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*20px) calc(var(--rel_prop_width)*0px);
+    gap: calc(var(--rel_prop_height)*127px) calc(var(--rel_prop_width)*127px);
+
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(515px));
+    height: calc(var(--rel_prop_height)*(83px));
+    left: calc(var(--rel_prop_width)*(32px));
+    top: calc(var(--rel_prop_height)*(0px));
+
+}
+
+/* Contenedor padre de todo aquello que no es el NAV*/
+#frame14 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--rel_prop_height)*20px) calc(var(--rel_prop_width)*0px) calc(var(--rel_prop_width)*0px);
+    gap: calc(var(--rel_prop_height)*20px) calc(var(--rel_prop_width)*20px);
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(506px));
+    left: calc(var(--rel_prop_width)*(32px));
+    top: calc(var(--rel_prop_height)*(83px));
+    border-top: calc(var(--rel_prop_width)*(3px)) solid #2F8DAB;
+
+}
+
+/*************** Start DEPREDADORES ************* */
+
+/********** Start BASICO ******** */
+/*contenedor del boton depredadores */
+#divsBasicosDepredadores {
+    width: calc(var(--rel_prop_width)*(136px));
+}
+#divsBasicosDepredadores:hover {
+    cursor: pointer;
+}
+
+
+/********** Start 3 Secciones (BASICO, BIOLOGICO, INFORMATICO) ******** */
+.textoh2 {
+    width: calc(var(--rel_prop_width)*(85px));
+    height: calc(var(--rel_prop_height)*(23px));
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(var(--rel_prop_height)*(21px));
+    line-height: calc(var(--rel_prop_height)*(23px));
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #000000;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin-bottom: 0px;
+}
+
+
+/********** Start 2 Secciones DEPREDADOR Y PRESA ******** */
+/********** Start BASICO ******** */
+/*contenedor padre de BASICO*/
+.basicos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: calc(var(--rel_prop_height)*0px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(70px));
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*contenedor que contiene todo el titulo de BASICO */
+.frame18 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*0px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    width: calc(var(--rel_prop_width)*(120px));
+    height: calc(var(--rel_prop_height)*(25px));
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*contenedor del contenido de BASICOS menos el TITULO */
+.frame46 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding:  calc(var(--rel_prop_height)*0px);
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(35px));
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* contenedor del texto de los botones del frame46*/
+.textoFrame46 {
+    width: calc(var(--rel_prop_width)*(106px));
+    height: calc(var(--rel_prop_height)*(18px));
+
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(var(--rel_prop_height)*(15px));
+    line-height: calc(var(--rel_prop_height)*(18px));
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    justify-content:center;
+
+    color: #2F8DAB;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin-bottom: 0px;
+}
+
+/* subcontenedor izquierdo del frame46*/
+.frame43 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*0px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    width: calc(var(--rel_prop_width)*(254px));
+    height: calc(var(--rel_prop_height)*(35px));
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*contenedor AMPLIO de los botones de PRESA Y DEPREDADOR*/
+.frame44 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(254px));
+    height: calc(var(--rel_prop_height)*(35px));
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/* contenedor REDUCIDO de los botones PRESA y DEPREDADOR*/
+.divsBasicos {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_height)*15px);
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+    width: calc(var(--rel_prop_width)*(82px));
+    height: calc(var(--rel_prop_height)*(35px));
+
+    background: #FFFFFF;
+
+    border: 1px solid #2F8DAB;
+    border-radius: 59px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.divsBasicos.activo {
+    background: #2F8DAB;
+}
+.divsBasicos.activo p{
+    color: #FFFFFF;
+}
+
+#divsBasicosPresas:hover {
+    cursor: pointer;
+}
+/********** End BASICO ******** */
+
+
+/********** Start BIOLOGICO ******** */
+/* contenedor de la seccion BIOLOGICOS*/
+.Biologicos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(151px));
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* contenedor titulo Biologicos*/
+.textBiologicos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(152px));
+    height: calc(var(--rel_prop_height)*(25px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*contenido BIOLOGICOS que NO es el titulo*/
+.contentBiologicos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(116px));
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/*contenedor de texto y slider de eneriga maxima*/
+.energiaMaxima1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(30px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/*contenedor del texto y slider algo más pequeño que energiaMaxima1*/
+.energiaMaxima2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(30px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+/*contenedor del slider*/
+.sliderEnergiaMaxima {
+    width: calc(var(--rel_prop_width)*(260px));
+    height: calc(var(--rel_prop_height)*(14px));
+
+    display: flex;
+    align-items: center;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+/*slider*/
+.inputSlider {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(260px));
+    top: calc(var(--rel_prop_height)*(0));
+
+    background: #1B1C1E;
+    border-radius: calc(var(--rel_prop_width)*(6px));
+}
+
+/* contenedor numero Slider */
+.numeroSlider {
+    width: calc(var(--rel_prop_width)*(39px));
+    height:  calc(var(--rel_prop_height)*(30px));
+
+    border-radius: calc(var(--rel_prop_width)*(5px));
+    font-size: calc(var(--rel_prop_width)*(15px));
+    font-family: 'Karla';
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* numero Slider */
+.pNumSlider {
+    position: absolute;
+    width: calc(var(--rel_prop_width)*(9px));
+    height: calc(var(--rel_prop_height)*(24px));
+    left : 97%;
+
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(var(--rel_prop_height)*(15px));
+    line-height: calc(var(--rel_prop_height)*(18px));
+
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    color: #000000;
+}
+
+/*** start slider`s style***/
+input[type=number] {
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(var(--rel_prop_width)*(13.3px));
+    color: #000000;
+}
+
+input[type="range"] {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
+    width: calc(var(--rel_prop_width)*(260px));
+    height: calc(var(--rel_prop_height)*(4px));
+    cursor: pointer;
+    outline: none;
+    border-radius: 15px;
+    
+    background: #000000;
+}
+  
+  /* Slider personalizado */
+input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
+    height: calc(var(--rel_prop_height)*(14px));
+    width: calc(var(--rel_prop_height)*(14px));
+    background-color: #2F8DAB;
+    border-radius: 50%;
+    border: none;
+  
+    transition: .2s ease-in-out;
+}
+/*** end slider`s style***/
+
+/* contenedor contenido BIOLOGICOS menos el TITULO */
+.subContentBiologicos {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(76px));
+
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    bottom: 20px;
+}
+
+/* contenedor izquierdo del contenido de BIOLOGICOS */
+#izqContentBiologicos {
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(76px));
+}
+
+/* contenedor derecho del contenido de BIOLOGICOS */
+#dchaContentBiologicos {
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(76px));
+}
+
+/********** End BIOLOGICO ******** */
+
+.columnaInput {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    flex: none;
+    flex-grow: 0;
+}
+
+.filaInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(30px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+/********** Start INFORMATICO ******** */
+/*Contenedor padre de INFORMATICOS*/
+.informaticos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(225px));
+
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+}
+
+/*contenedor TITULO de INFORMATICOS*/
+.textInformaticos  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(184.87px));
+    height: calc(var(--rel_prop_height)*(25px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+/*contenedor contenido INFORMATICOS menos el TITULO*/
+.contentInformaticos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(508px));
+    height: calc(var(--rel_prop_height)*(190px));
+    margin-bottom:0px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;  
+}
+
+/* contenedor izquierdo del contenido de INFORMATICOS */
+#izqContentInformaticos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(190px));
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* contenedor derecho del contenido de BIOLOGICOS */
+#dchaContentInformaticos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: calc(var(--rel_prop_height)*10px) calc(var(--rel_prop_width)*10px);
+
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(190px));
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+
+/*BASICOS BIOLOGICO E INFORMATICO*/
+/* Texto de toda la sección del contenido de BASICO, BIOLOGICO e INFORMATICO */
+.textContent {
+    width: calc(var(--rel_prop_width)*(170px));
+    height: calc(var(--rel_prop_height)*(12.16px));
+
+    font-family: 'Jura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(var(--rel_prop_height)*(15px));
+    line-height: calc(var(--rel_prop_height)*(18px));
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    color: #000000;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin-bottom: 0px;
+}
+
+/*cajas input*/
+.input {
+    box-sizing: border-box;
+
+    width: calc(var(--rel_prop_width)*(50px));
+    height: calc(var(--rel_prop_height)*(30px));
+
+    border: 1px solid #1B1C1E;
+    border-radius: 5px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.content_ {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--rel_prop_height)*0px) calc(var(--rel_prop_width)*0px);
+
+
+    width: calc(var(--rel_prop_width)*(230px));
+    height: calc(var(--rel_prop_height)*(36px));
+
+    flex: none;
+    flex-grow: 0;
+}
+/********** End BASICO BIOLOGICO E INFORMATICO ******** */
+
+/********** AÑADIDO DE LOS TOOLIPS ***********/
+
+.cssToolTip {
+    position: relative; /* Esta clase tiene que tener posicion relativa */
+    font-family: 'Jura';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 75%;
+}
+
+/* El tooltip */
+
+.cssToolTip span {
+    background: rgba(246,242,242) center left 5px no-repeat; 
+    border-radius: 5px;
+    display: none; /* El tooltip por defecto estara oculto */
+
+    font-size: 1em;
+    padding: 5px 5px 5px 10px;
+    max-width: 6000px;
+    position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
+
+    bottom: 30px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
+
+    left: 10px;  /*Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
+
+    z-index: 100; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
+
+}
+
+/* El tooltip cuando se muestra */
+
+.cssToolTip:hover span {
+    display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
+
+}
